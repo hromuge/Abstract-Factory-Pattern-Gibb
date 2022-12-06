@@ -1,8 +1,11 @@
 package Main;
 
+import abstracts.Car;
+import ford.Ford;
 import ford.FordFactory;
 import ford.FordMotor;
 import ford.FordSteeringWheel;
+import mercedes.Mercedes;
 import mercedes.MercedesFactory;
 import mercedes.MercedesMotor;
 import mercedes.MercedesSteeringWheel;
@@ -10,11 +13,15 @@ import mercedes.MercedesSteeringWheel;
 public class Main {
     public static void main(String[] args) {
         FordFactory fordFactory = new FordFactory();
-        FordMotor fordMotor = (FordMotor) fordFactory.createMotor();
-        FordSteeringWheel fordSteeringWheel = (FordSteeringWheel) fordFactory.createSteeringWheel();
+        Ford ford = new Ford((FordMotor) fordFactory.createMotor(), (FordSteeringWheel) fordFactory.createSteeringWheel());
 
         MercedesFactory mercedesFactory = new MercedesFactory();
-        MercedesMotor mercedesMotor = (MercedesMotor) mercedesFactory.createMotor();
-        MercedesSteeringWheel mercedesSteeringWheel = (MercedesSteeringWheel) mercedesFactory.createSteeringWheel();
+        Mercedes mercedes = new Mercedes((MercedesMotor) mercedesFactory.createMotor(), (MercedesSteeringWheel) mercedesFactory.createSteeringWheel());
+
+        Car[] cars = {ford, mercedes};
+
+        for (Car car: cars) {
+            car.drive();
+        }
     }
 }
